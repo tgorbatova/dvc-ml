@@ -23,8 +23,8 @@ def predict_pipeline(js):
         "with": 9,
     }
 
-    model_pkl_file = "RFClf.pkl"
-    vectorizer_file = "CountVectorizer.pkl"
+    model_pkl_file = "model/RFClf.pkl"
+    vectorizer_file = "model/CountVectorizer.pkl"
 
     model = joblib.load(model_pkl_file)
 
