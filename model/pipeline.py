@@ -23,15 +23,12 @@ def predict_pipeline(js):
         "with": 9,
     }
 
-    model_pkl_file = "src/RFClf.pkl"
-    vectorizer_file = "src/CountVectorizer.pkl"
-    repo='https://github.com/tgorbatova/dvc-ml.git'
+    model_pkl_file = "RFClf.pkl"
+    vectorizer_file = "CountVectorizer.pkl"
 
-    with dvc.api.open(model_pkl_file, remote='cloud_remote', mode='rb') as file:
-        model = joblib.load(file)
+    model = joblib.load(model_pkl_file)
 
-    with dvc.api.open(vectorizer_file, remote='cloud_remote', mode='rb') as file:
-        vec = joblib.load(file)
+    vec = joblib.load(vectorizer_file)
 
     df = pd.DataFrame.from_dict(js, orient="index").T
 
