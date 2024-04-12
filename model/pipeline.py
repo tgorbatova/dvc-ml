@@ -1,4 +1,5 @@
 import pandas as pd
+import dvc.api
 import joblib
 
 
@@ -22,14 +23,14 @@ def predict_pipeline(js):
         "with": 9,
     }
 
-    model_pkl_file = "src/RFClf.pkl.dvc"
-    vectorizer_file = "src/CountVectorizer.pkl.dvc"
+    model_pkl_file = "src/RFClf.pkl"
+    vectorizer_file = "src/CountVectorizer.pkl"
     repo='https://github.com/tgorbatova/dvc-ml.git'
 
-    with dvc.api.open(model_pkl_file, repo=repo, mode='rb') as file:
+    with dvc.api.open(model_pkl_file, remote='cloud_remote', mode='rb') as file:
         model = joblib.load(file)
 
-    with dvc.api.open(vectorizer_file, repo=repo, mode='rb') as file:
+    with dvc.api.open(vectorizer_file, remote='cloud_remote', mode='rb') as file:
         vec = joblib.load(file)
 
     df = pd.DataFrame.from_dict(js, orient="index").T
@@ -51,9 +52,10 @@ def predict_pipeline(js):
     res = df.to_dict("index")
     return res
 
-test_js = {
-    'objects': ['table'],
-    'subjects': ['apple'],
-    }
+if __name__ == "__main__":
+    test_js = {
+        'objects': ['table'],
+        'subjects': ['apple'],
+        }
 
-predict_pipeline(test_js)
+    print(predict_pipeline(test_js))
