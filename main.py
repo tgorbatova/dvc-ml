@@ -7,16 +7,15 @@ from model.pipeline import predict_pipeline
 
 import wget
 
-output_directory = "./model"
 prefix = 'https://drive.google.com/uc?/export=download&id='
 
 model_url = "https://drive.google.com/file/d/1Pk_qlDIYygNQzHNZuQiK-jU_tb0dSalT/view?usp=sharing"
 model_file_id = model_url.split('/')[-2]
-wget.download(prefix+model_file_id, out=output_directory)
+wget.download(prefix+model_file_id, out="./model/RFClf.pkl")
 
 vec_url = "https://drive.google.com/file/d/1O4HNdrjJPF2QNSDhlbmtKkqPEkVhlLv-/view?usp=sharing"
-vec_file_id = model_url.split('/')[-2]
-wget.download(prefix+model_file_id, out=output_directory)
+vec_file_id = vec_url.split('/')[-2]
+wget.download(prefix+vec_file_id, out="./model/CountVectorizer.pkl")
 
 
 app = FastAPI()
