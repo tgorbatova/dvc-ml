@@ -1,0 +1,5 @@
+outs:
+- md5: 3068166999c5268595ff53448be6b615
+  size: 50136
+  hash: md5
+  path: CountVectorizer.pkl

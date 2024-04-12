@@ -22,21 +22,15 @@ def predict_pipeline(js):
         "with": 9,
     }
 
-    model_pkl_file = "service/baseline/src/RFClf.pkl"
-    vectorizer_file = "service/baseline/src/CountVectorizer.pkl"
-    # repo='https://github.com/NLP-team-MOVS2023/nlp_project_MOVS.git'
+    model_pkl_file = "src/RFClf.pkl.dvc"
+    vectorizer_file = "src/CountVectorizer.pkl.dvc"
+    repo='https://github.com/tgorbatova/dvc-ml.git'
 
-    # with dvc.api.open(model_pkl_file, repo=repo, mode='rb') as file:
-    #     model = joblib.load(file)
+    with dvc.api.open(model_pkl_file, repo=repo, mode='rb') as file:
+        model = joblib.load(file)
 
-    # with dvc.api.open(vectorizer_file, repo=repo, mode='rb') as file:
-    #     vec = joblib.load(file)
-
-    with open(model_pkl_file, "rb") as f:
-        model = joblib.load(f)
-
-    with open(vectorizer_file, "rb") as f:
-        vec = joblib.load(f)
+    with dvc.api.open(vectorizer_file, repo=repo, mode='rb') as file:
+        vec = joblib.load(file)
 
     df = pd.DataFrame.from_dict(js, orient="index").T
 
@@ -56,3 +50,10 @@ def predict_pipeline(js):
 
     res = df.to_dict("index")
     return res
+
+test_js = {
+    'objects': ['table'],
+    'subjects': ['apple'],
+    }
+
+predict_pipeline(test_js)
