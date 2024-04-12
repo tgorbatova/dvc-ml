@@ -8,6 +8,7 @@ from model.pipeline import predict_pipeline
 import wget
 
 output_directory = "model"
+prefix = 'https://drive.google.com/uc?/export=download&id='
 
 model_url = "https://drive.google.com/file/d/1Pk_qlDIYygNQzHNZuQiK-jU_tb0dSalT/view?usp=sharing"
 model_file_id = model_url.split('/')[-2]
