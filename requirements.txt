@@ -7,3 +7,4 @@ joblib
 uvicorn
 fastapi
 pydantic-settings
+wget
